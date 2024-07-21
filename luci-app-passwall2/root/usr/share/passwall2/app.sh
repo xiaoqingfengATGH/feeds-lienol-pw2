@@ -388,6 +388,10 @@ run_xray() {
 	}
 
 	lua $UTIL_XRAY gen_config -node $node -redir_port $redir_port -tcp_proxy_way $tcp_proxy_way -loglevel $loglevel ${_extra_param} > $config_file
+	if [ -e "/usr/bin/homeledeCore" ] && [ -x "/usr/bin/homeledeCore" ] && [ -e "/etc/init.d/mosdns" ] && [ -x "/etc/init.d/mosdns" ]; then
+		/usr/bin/homeledeCore mosdnsConfGenerate -g /usr/share/v2ray -i $config_file -o /var/mosdns
+		/etc/init.d/mosdns restart
+	fi
 	ln_run "$(first_type $(config_t_get global_app ${type}_file) ${type})" ${type} $log_file run -c "$config_file"
 }
 
