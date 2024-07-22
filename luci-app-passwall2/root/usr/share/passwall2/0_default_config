@@ -16,6 +16,7 @@ config global
 dns.google.com 8.8.8.8'
 	option log_node '1'
 	option loglevel 'error'
+	option write_ipset_direct '0'
 	
 config global_haproxy
 	option balancing_enable '0'

@@ -240,10 +240,15 @@ node_socks_port.datatype = "port"
 
 s:tab("DNS", translate("DNS"))
 
+text = s:taboption("DNS", DummyValue, "_homelede_tip", "DNS设置")
+text.rawhtml = true
+text.value = "此部分已经由Homelede内置Mosdns接管，无需设置。"
+
 o = s:taboption("DNS", ListValue, "remote_dns_protocol", translate("Remote DNS Protocol"))
 o:value("tcp", "TCP")
 o:value("doh", "DoH")
 o:value("udp", "UDP")
+o:depends({ __hide = true })
 
 ---- DNS Forward
 o = s:taboption("DNS", Value, "remote_dns", translate("Remote DNS"))
@@ -258,6 +263,7 @@ o:value("208.67.220.220", "208.67.220.220 (OpenDNS)")
 o:value("208.67.222.222", "208.67.222.222 (OpenDNS)")
 o:depends("remote_dns_protocol", "tcp")
 o:depends("remote_dns_protocol", "udp")
+o:depends({ __hide = true })
 
 ---- DoH
 o = s:taboption("DNS", Value, "remote_dns_doh", translate("Remote DNS DoH"))
@@ -273,6 +279,7 @@ o:value("https://doh.libredns.gr/dns-query,116.202.176.26", "LibreDNS")
 o:value("https://doh.libredns.gr/ads,116.202.176.26", "LibreDNS (No Ads)")
 o.validate = doh_validate
 o:depends("remote_dns_protocol", "doh")
+o:depends({ __hide = true })
 
 o = s:taboption("DNS", Value, "remote_dns_client_ip", translate("Remote DNS EDNS Client Subnet"))
 o.description = translate("Notify the DNS server when the DNS query is notified, the location of the client (cannot be a private IP address).") .. "<br />" ..
@@ -284,16 +291,19 @@ o = s:taboption("DNS", ListValue, "remote_dns_detour", translate("Remote DNS Out
 o.default = "remote"
 o:value("remote", translate("Remote"))
 o:value("direct", translate("Direct"))
+o:depends({ __hide = true })
 
 o = s:taboption("DNS", Flag, "remote_fakedns", "FakeDNS", translate("Use FakeDNS work in the shunt domain that proxy."))
 o.default = "0"
 o.rmempty = false
+o:depends({ __hide = true })
 
 o = s:taboption("DNS", ListValue, "remote_dns_query_strategy", translate("Remote Query Strategy"))
 o.default = "UseIPv4"
 o:value("UseIP")
 o:value("UseIPv4")
 o:value("UseIPv6")
+o:depends({ __hide = true })
 
 o = s:taboption("DNS", TextValue, "dns_hosts", translate("Domain Override"))
 o.rows = 5
@@ -312,6 +322,7 @@ end
 o = s:taboption("DNS", Flag, "write_ipset_direct", translate("Direct DNS result write to IPSet"), translate("Perform the matching direct domain name rules into IP to IPSet/NFTSet, and then connect directly (not entering the core). Maybe conflict with some special circumstances."))
 o.default = "1"
 o.rmempty = false
+o:depends({ __hide = true })
 
 o = s:taboption("DNS", Button, "clear_ipset", translate("Clear IPSet"), translate("Try this feature if the rule modification does not take effect."))
 o.inputstyle = "remove"
