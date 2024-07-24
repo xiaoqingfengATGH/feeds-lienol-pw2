@@ -317,7 +317,7 @@ run_xray() {
 		DIRECT_DNS_UDP_SERVER=${_dns_address}
 		DIRECT_DNS_UDP_PORT=${_dns_port}
 
-		[ "${write_ipset_direct}" = "1" ] && {
+		[ "A" = "B" && "${write_ipset_direct}" = "1" ] && {
 			direct_dnsmasq_listen_port=$(get_new_port $(expr $dns_listen_port + 1) udp)
 			local set_flag="${flag}"
 			local direct_ipset_conf=$TMP_PATH/dnsmasq_${flag}_direct.conf

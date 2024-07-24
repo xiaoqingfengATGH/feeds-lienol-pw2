@@ -99,9 +99,9 @@ if (has_singbox or has_xray) and #nodes_table > 0 then
 			local vid = v.id
 			-- shunt node type, Sing-Box or Xray
 			local type = s:taboption("Main", ListValue, vid .. "-type", translate("Type"))
-			if has_singbox then
-				type:value("sing-box", translate("Sing-Box"))
-			end
+			-- if has_singbox then
+			-- 	type:value("sing-box", translate("Sing-Box"))
+			-- end
 			if has_xray then
 				type:value("Xray", translate("Xray"))
 			end
@@ -320,7 +320,7 @@ o.remove = function(self, section)
 end
 
 o = s:taboption("DNS", Flag, "write_ipset_direct", translate("Direct DNS result write to IPSet"), translate("Perform the matching direct domain name rules into IP to IPSet/NFTSet, and then connect directly (not entering the core). Maybe conflict with some special circumstances."))
-o.default = "1"
+o.default = "0"
 o.rmempty = false
 o:depends({ __hide = true })
 
