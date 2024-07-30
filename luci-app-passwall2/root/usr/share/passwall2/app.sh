@@ -1128,6 +1128,10 @@ stop() {
 	rm -rf ${TMP_PATH}
 	rm -rf /tmp/lock/${CONFIG}_socks_auto_switch*
 	echolog "清空并关闭相关程序和缓存完成。"
+	if [ -e "/usr/bin/homeledeCore" ] && [ -x "/usr/bin/homeledeCore" ] && [ -e "/etc/init.d/mosdns" ] && [ -x "/etc/init.d/mosdns" ]; then
+		/usr/bin/homeledeCore mosdnsDefaultConfGenerate -g /usr/share/v2ray -o /var/mosdns
+		/etc/init.d/mosdns restart
+	fi
 	exit 0
 }
 
